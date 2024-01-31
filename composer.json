@@ -1,0 +1,20 @@
+{
+    "name": "rahweb/cms-assistant",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Rahweb\\CmsAssistant\\": "src/"
+        },
+        "files": [
+            "./helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Hamide Jafari",
+            "email": "hamideh9696@gmail.com"
+        }
+    ],
+    "require": {}
+}
