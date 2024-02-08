@@ -11,4 +11,9 @@ class User
     {
         return API::get('v1/users');
     }
+
+    public static function get(int $id): Collection
+    {
+        return API::get('v1/users/' . $id);
+    }
 }
