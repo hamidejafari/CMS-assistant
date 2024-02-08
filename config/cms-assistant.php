@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'api-base-url' => '',
+    'api-base-url' => 'http://beauty-cms:8888/api/',
 ];
