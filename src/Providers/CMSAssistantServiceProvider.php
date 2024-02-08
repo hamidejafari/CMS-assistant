@@ -21,7 +21,7 @@ class CMSAssistantServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                (dirname(__DIR__,2) . '/config/cms-assistant.php') => app_path('config'),
+                (dirname(__DIR__,2) . '/config/cms-assistant.php') => base_path('config'),
             ]);
         }
     }

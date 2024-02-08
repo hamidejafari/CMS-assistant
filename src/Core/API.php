@@ -122,7 +122,7 @@ class API
         return collect([
             'success' => $response['success'] ?? false,
             'data' => $data,
-            'message' => (string)$response['message'] ?? null,
+            'message' => $response['message'] ?? null,
         ]);
     }
 
@@ -134,7 +134,7 @@ class API
             }
         }
 
-        $version = \Composer\InstalledVersions::getVersion('ra');
+        //$version = \Composer\InstalledVersions::getVersion('ra');
         $cookies = self::mergeCookies();
 
         $headerData = [
