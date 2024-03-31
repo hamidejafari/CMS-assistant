@@ -5,6 +5,9 @@ namespace Rahweb\CmsAssistant\Core;
 use Illuminate\Support\Collection;
 use Symfony\Component\HttpFoundation\Response;
 
+//Todo : refactor this and put composer.json
+require_once (__DIR__.'/../../helpers.php');
+
 class API
 {
     public static function get(string $uri, array $queryParam = [], $headers = []): Collection
@@ -12,7 +15,7 @@ class API
         $headers = self::handleHeaders($headers);
 
         $curl = curl_init();
-        $fullUrl = sprintf("%s%s?%s", config('cms-assistant.api-base-url'), $uri, http_build_query($queryParam));
+        $fullUrl = sprintf("%s%s?%s", config('cms-assistant.api-base-url'), trim($uri,'/'), http_build_query($queryParam));
         curl_setopt($curl, CURLOPT_URL, $fullUrl);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
@@ -118,11 +121,10 @@ class API
     public static function parseData($response): Collection
     {
         $data = json_decode($response ?? '', true);
-
         return collect([
-            'success' => $response['success'] ?? false,
-            'data' => $data,
-            'message' => $response['message'] ?? null,
+            'success' => $data['success'] ?? false,
+            'data' => $data['data'],
+            'message' => $data['message'] ?? null,
         ]);
     }
 
