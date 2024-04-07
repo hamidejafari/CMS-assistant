@@ -122,9 +122,9 @@ class API
     {
         $data = json_decode($response ?? '', true);
         return collect([
-            'success' => $data['success'] ?? false,
-            'data' => $data['data'],
-            'message' => $data['message'] ?? null,
+            'success' => @$data['success'] ?? false,
+            'data' => @$data['data'],
+            'message' => @$data['message'] ?? null,
         ]);
     }
 
