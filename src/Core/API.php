@@ -143,8 +143,8 @@ class API
 //            'Api-Key: ' . $GLOBALS['apikey'],
             'Content-Type: application/json',
             'REAL-HTTP-CLIENT-IP: ' . get_ip(),
-            'REAL-HTTP-CLIENT-AGENT: ' . $_SERVER['HTTP_USER_AGENT'] ?? '',
-            'REAL-HTTP-CLIENT-REFERRER: ' . ($_SERVER['HTTP_REFERER'] ?? ''),
+            'REAL-HTTP-CLIENT-AGENT: ' . @$_SERVER['HTTP_USER_AGENT'] ?? '',
+            'REAL-HTTP-CLIENT-REFERRER: ' . (@$_SERVER['HTTP_REFERER'] ?? ''),
 //            'Authorization: Bearer ' . User::getToken(),
             "Cookie: $cookies",
 //            'LSPWEB-SDK-VERSION: ' . $version
