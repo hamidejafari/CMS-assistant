@@ -6,12 +6,12 @@ use Rahweb\CmsAssistant\Core\API;
 
 class Service
 {
-    public static function services(): Collection
+    public static function getServiceList(): Collection
     {
         return API::get('v1/services');
     }
 
-    public static function get($url): Collection
+    public static function getServiceDetail($url): Collection
     {
         return API::get('v1/service/' . $url);
     }
