@@ -11,8 +11,8 @@ class Service
         return API::get('v1/services');
     }
 
-    public static function get($slug): Collection
+    public static function get($url): Collection
     {
-        return API::get('v1/service/' . $slug);
+        return API::get('v1/service/' . $url);
     }
 }
