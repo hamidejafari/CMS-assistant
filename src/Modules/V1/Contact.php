@@ -9,7 +9,7 @@ class Contact
 {
     public static function create($request): Collection
     {
-        return API::get('v1/create-contact');
+        return API::get('v1/post-contact');
     }
 
 
