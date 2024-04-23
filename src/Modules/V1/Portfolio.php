@@ -10,6 +10,10 @@ class Portfolio
     {
         return API::get('v1/portfolios');
     }
+    public static function getServiceForFilter(): Collection
+    {
+        return API::get('v1/portfolio-filters');
+    }
 
     public static function getDetail($url): Collection
     {
