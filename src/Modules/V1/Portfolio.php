@@ -14,6 +14,10 @@ class Portfolio
     {
         return API::get('v1/portfolio-filters');
     }
+    public static function getListForVue(): Collection
+    {
+        return API::get('v1/portfolio-vue');
+    }
 
     public static function getDetail($url): Collection
     {
