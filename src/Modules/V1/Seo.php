@@ -9,6 +9,6 @@ class Seo
 
     public static function getStatic($url): Collection
     {
-        return API::get('v1/seo/' . $url);
+        return API::get('v1/seo/' . trim($url,'/'));
     }
 }
