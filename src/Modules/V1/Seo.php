@@ -11,7 +11,7 @@ class Seo
     {
         return API::get('v1/seo/' . trim($url,'/'));
     }
-    public static function getRedirct(): Collection
+    public static function getRedirect(): Collection
     {
         return API::get('v1/redirect/');
     }
