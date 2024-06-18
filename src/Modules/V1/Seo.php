@@ -15,4 +15,8 @@ class Seo
     {
         return API::get('v1/redirect/');
     }
+    public static function getCanonical(): Collection
+    {
+        return API::get('v1/canonical/');
+    }
 }
