@@ -16,4 +16,8 @@ class General
     {
         return API::get('v1/setting');
     }
+    public static function search($request): Collection
+    {
+        return API::get('v1/search-api',$request);
+    }
 }
