@@ -18,6 +18,6 @@ class General
     }
     public static function search($request): Collection
     {
-        return API::get('v1/search-api',$request);
+        return API::get('v1/search-api',$request) ;
     }
 }
