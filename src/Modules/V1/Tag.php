@@ -11,8 +11,8 @@ class Tag
         return API::get('v1/tags');
     }
 
-    public static function getDetail($url): Collection
+    public static function getDetail($url,$query): Collection
     {
-        return API::get('v1/tag/' . $url);
+        return API::get('v1/tag/' . $url,$query);
     }
 }
