@@ -6,7 +6,7 @@ use Rahweb\CmsAssistant\Core\API;
 
 class Tag
 {
-    public static function getList(): Collection
+    public static function getList():  Collection
     {
         return API::get('v1/tags');
     }
