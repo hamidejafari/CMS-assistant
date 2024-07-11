@@ -4,7 +4,7 @@ namespace Rahweb\CmsAssistant\Modules\V1;
 use Illuminate\Support\Collection;
 use Rahweb\CmsAssistant\Core\API;
 
-class Portfolio
+class Tag
 {
     public static function getList(): Collection
     {
