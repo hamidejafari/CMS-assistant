@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use Symfony\Component\HttpFoundation\Response;
 
 //Todo : refactor this and put composer.json
-require_once (__DIR__.'/../../helpers.php');
+require_once(__DIR__ . '/../../helpers.php');
 
 class API
 {
@@ -15,7 +15,7 @@ class API
         $headers = self::handleHeaders($headers);
 
         $curl = curl_init();
-        $fullUrl = sprintf("%s%s?%s", config('cms-assistant.api-base-url'), trim($uri,'/'), http_build_query($queryParam));
+        $fullUrl = sprintf("%s%s?%s", config('cms-assistant.api-base-url'), trim($uri, '/'), http_build_query($queryParam));
         curl_setopt($curl, CURLOPT_URL, $fullUrl);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
@@ -30,7 +30,8 @@ class API
         }
         curl_close($curl);
 
-        return self::parseData($response);
+
+        return self::parseData($response, $httpCode);
     }
 
     public static function put(string $uri, array $formParams = [], array $headers = []): Collection
@@ -50,8 +51,7 @@ class API
         $response = curl_exec($curl);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
-
-        return self::parseData($response);
+        return self::parseData($response, $httpCode);
     }
 
     public static function post(string $uri, array $formParams = [], array $headers = []): Collection
@@ -80,7 +80,7 @@ class API
         $headers = self::handleHeaders($headers);
 
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL,  sprintf("%s%s", config('cms-assistant.api-base-url'), $uri));
+        curl_setopt($curl, CURLOPT_URL, sprintf("%s%s", config('cms-assistant.api-base-url'), $uri));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
@@ -118,13 +118,17 @@ class API
         return self::parseData($response);
     }
 
-    public static function parseData($response): Collection
+    public static function parseData($response, $httpCode = 200): Collection
     {
         $data = json_decode($response ?? '', true);
+        if($httpCode == 500){
+            \Log::info($response);
+        }
         return collect([
             'success' => @$data['success'] ?? false,
             'data' => @$data['data'],
-            'message' => @$data['message'] ?? null,
+            'message' => $httpCode == 500 ? $response : @$data['message'],
+            'status' => $httpCode,
         ]);
     }
 

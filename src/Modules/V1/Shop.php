@@ -15,9 +15,9 @@ class Shop
     {
         return API::get('v1/category/' . $url);
     }
-    public static function getBrandList(): Collection
+    public static function getBrandList($title = null): Collection
     {
-        return API::get('v1/brands');
+        return API::get('v1/brands',['title'=>$title]);
     }
 
     public static function getBrandDetail($url): Collection
