@@ -24,6 +24,7 @@ class API
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         }
         $response = curl_exec($curl);
+        dd($response,$headers);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         if ($httpCode == Response::HTTP_SERVICE_UNAVAILABLE) {
             //TODO: Include UPDATING view
