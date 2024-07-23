@@ -15,6 +15,8 @@ class API
 
         $headers = self::handleHeaders($headers);
         $curl = curl_init();
+        \Log::info(config('cms-assistant.api-base-url').trim($uri, '/'));
+        \Log::info($headers);
         $fullUrl = sprintf("%s%s?%s", config('cms-assistant.api-base-url'), trim($uri, '/'), http_build_query($queryParam));
         curl_setopt($curl, CURLOPT_URL, $fullUrl);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -24,7 +26,6 @@ class API
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         }
         $response = curl_exec($curl);
-        dd($response,$headers);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         if ($httpCode == Response::HTTP_SERVICE_UNAVAILABLE) {
             //TODO: Include UPDATING view
