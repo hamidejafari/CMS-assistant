@@ -12,8 +12,8 @@ class API
 {
     public static function get(string $uri, array $queryParam = [], $headers = []): Collection
     {
-        $headers = self::handleHeaders($headers);
 
+        $headers = self::handleHeaders($headers);
         $curl = curl_init();
         $fullUrl = sprintf("%s%s?%s", config('cms-assistant.api-base-url'), trim($uri, '/'), http_build_query($queryParam));
         curl_setopt($curl, CURLOPT_URL, $fullUrl);
@@ -29,7 +29,6 @@ class API
             //TODO: Include UPDATING view
         }
         curl_close($curl);
-
 
         return self::parseData($response, $httpCode);
     }
@@ -121,7 +120,7 @@ class API
     public static function parseData($response, $httpCode = 200): Collection
     {
         $data = json_decode($response ?? '', true);
-        if($httpCode == 500){
+        if ($httpCode == 500) {
             \Log::info($response);
         }
         return collect([
@@ -142,7 +141,8 @@ class API
 
         //$version = \Composer\InstalledVersions::getVersion('ra');
         $cookies = self::mergeCookies();
-
+        $site_name = count(explode('.', request()->getHost())) > 2 ? explode('.', request()->getHost())[1] : explode('.', request()->getHost())[0];
+        $site_name = strtolower($site_name);
         $headerData = [
 //            'Api-Key: ' . $GLOBALS['apikey'],
             'Content-Type: application/json',
@@ -151,7 +151,7 @@ class API
             'REAL-HTTP-CLIENT-REFERRER: ' . (@$_SERVER['HTTP_REFERER'] ?? ''),
 //            'Authorization: Bearer ' . User::getToken(),
             "Cookie: $cookies",
-//            'LSPWEB-SDK-VERSION: ' . $version
+            'SITE-NAME: ' . $site_name
         ];
 
         return array_merge($headerData, $headers);
