@@ -143,8 +143,8 @@ class API
 
         //$version = \Composer\InstalledVersions::getVersion('ra');
         $cookies = self::mergeCookies();
-        $site_name = count(explode('.', request()->getHost())) > 2 ? explode('.', request()->getHost())[1] : explode('.', request()->getHost())[0];
-        $site_name = strtolower($site_name);
+
+        $site_name = strtolower(str_replace('www.','',request()->getHost()));
         $headerData = [
 //            'Api-Key: ' . $GLOBALS['apikey'],
             'Content-Type: application/json',
